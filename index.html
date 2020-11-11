@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://kit.fontawesome.com/08168b175b.js" crossorigin="anonymous"></script>
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+<header>Rock Paper Scissors</header>
+<div class="container">
+
+
+<!-- rounds box -->
+<div id="rounds-box">
+    <p class="rounds-box-title">how many rounds?</p>
+    <div id="roundsOutputEl"></div>
+</div>
+
+
+
+<!-- score box -->
+
+<div id="score-box">
+    <span>USER</span><h2 id="user-score">0</h2><span>:</span> <h2 id="comp-score">0</h2><span>COMP</span>
+</div>
+
+
+
+
+<!-- message -->
+<h3 id="msg">Let's play</h3>
+
+
+<!-- play control icons -->
+<div id="play-icons">
+
+<i class="far fa-hand-rock" data-handtype="rock"></i>
+<i class="far fa-hand-paper" data-handtype="paper"></i>
+<i class="far fa-hand-scissors" data-handtype="scissors"></i>
+
+</div>
+<p class="move">MAKE YOUR MOVE</p>
+
+
+
+
+
+<!-- reset link -->
+<footer>
+   <a href="#" id="reset" onclick="reset()">restart</a>
+</footer>
+
+
+
+
+</div>
+<script src="assets/js/main.js"></script>
+</body>
+
+</html>
