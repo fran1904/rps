@@ -1,21 +1,19 @@
-
 // references
-let roundsOutputElement = document.querySelector('#roundsOutputEl')
-let userScoreEl = document.querySelector('#user-score')
-let compScoreEl = document.querySelector('#comp-score')
-let userMsg = document.querySelector('#msg')
-let playIconsParent = document.querySelector('#play-icons')
-let restartEl = document.querySelector('#reset')
-
+let roundsOutputElement = document.querySelector("#roundsOutputEl");
+let userScoreEl = document.querySelector("#user-score");
+let compScoreEl = document.querySelector("#comp-score");
+let userMsg = document.querySelector("#msg");
+let playIconsParent = document.querySelector("#play-icons");
+let restartEl = document.querySelector("#reset");
 
 // Global declarations
-let roundCount = 0
-var userScore = 0
-var compScore = 0
-let numOfRounds = 5
-const computerChoices = ['rock', 'paper', 'scissors']
-let userChoice = ""
-let compChoice = ""
+let roundCount = 0;
+var userScore = 0;
+var compScore = 0;
+let numOfRounds = 5;
+const computerChoices = ["rock", "paper", "scissors"];
+let userChoice = "";
+let compChoice = "";
 let radioBtns = `<form action="return false">
 <div>
     <div>
@@ -37,118 +35,125 @@ let radioBtns = `<form action="return false">
         <label for="twenty">20</label>
     </div>
 </div>
-</form>`
+</form>`;
 
-roundsOutputElement.innerHTML = radioBtns
+roundsOutputElement.innerHTML = radioBtns;
 
 // functions
 let reset = () => {
-    roundsOutputElement.innerHTML = radioBtns
-    roundCount = 0
-    userScore = 0
-    userScoreEl.innerHTML = 0
-    compScore = 0
-    compScoreEl.innerHTML = 0
-    numOfRounds = 5
-    userChoice = ""
-    compChoice = ""
-}
+  roundsOutputElement.innerHTML = radioBtns;
+  roundCount = 0;
+  userScore = 0;
+  userScoreEl.innerHTML = 0;
+  compScore = 0;
+  compScoreEl.innerHTML = 0;
+  numOfRounds = 5;
+  userChoice = "";
+  compChoice = "";
+};
+
+const toggleClass = (state, ele) => {
+  stripClasses(ele);
+  if (state === "red") {
+    ele.classList.add("icon-btn--red");
+  }
+  if (state === "orange") {
+    ele.classList.add("icon-btn--orange");
+  }
+  if (state === "green") {
+    ele.classList.add("icon-btn--green");
+  }
+};
+
+const stripClasses = (ele) => {
+  ele.classList.remove("icon-btn--red");
+  ele.classList.remove("icon-btn--green");
+  ele.classList.remove("icon-btn--orange");
+};
 
 // Store the number of rounds selected by the user in numOfRounds.
-roundsOutputElement.addEventListener('click', (event) => {
-   numOfRounds = event.target.value
-})
+roundsOutputElement.addEventListener("click", (event) => {
+  numOfRounds = parseInt(event.target.value);
+});
 
+playIconsParent.addEventListener(
+  "click",
+  (event) => {
+    roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`;
+    userChoice = event.target.dataset.handtype;
+    compChoice =
+      computerChoices[Math.floor(Math.random() * computerChoices.length)];
 
-playIconsParent.addEventListener('click', (event) => {
-    console.log(event);
-    roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`
-    userChoice = event.target.dataset.handtype
-    compChoice = computerChoices[Math.floor(Math.random() * computerChoices.length)]
-
-    switch (userChoice){
-        case 'rock': {
-            if (compChoice === 'rock'){
-                userMsg.innerHTML = `It was a draw! You both chose ${userChoice}`
-                // event.target.style.background = 'orange'
-                roundCount++
-                roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`
-            } else if (compChoice === 'paper'){
-                userMsg.innerHTML = `${compChoice} (comp) beats ${userChoice} (user). You lose!`
-
-                compScore++
-                compScoreEl.innerHTML = compScore
-                roundCount++
-                roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`
-            } else {     
-                userMsg.innerHTML = `${userChoice} (user) beats ${compChoice}(comp). You win!`
-
-                userScore++
-                userScoreEl.innerHTML = userScore
-                roundCount++
-                roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`
-            }
-            break
-        } 
-        case 'paper': {
-            if (compChoice === 'paper'){
-                userMsg.innerHTML = `It was a draw! You both chose ${userChoice}`
-
-                roundCount++
-            } else if (compChoice === 'scissors'){
-                userMsg.innerHTML = `${compChoice} (comp) beats ${userChoice} (user). You lose!`
-
-                compScore++
-                compScoreEl.innerHTML = compScore
-                roundCount++
-                roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`
-            } else {    
-                userMsg.innerHTML = `${userChoice} (user) beats ${compChoice}(comp). You win!`
-
-                userScore++
-                userScoreEl.innerHTML = userScore
-                roundCount++
-                roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`
-            }
-            break
+    switch (userChoice) {
+      case "rock": {
+        if (compChoice === "rock") {
+          userMsg.innerHTML = `It was a draw! You both chose ${userChoice}`;
+          toggleClass("orange", event.target);
+          roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`;
+        } else if (compChoice === "paper") {
+          userMsg.innerHTML = `${compChoice} <sup>(comp)</sup> beats ${userChoice} <sup>(user)</sup>. You lose!`;
+          toggleClass("red", event.target);
+          compScore++;
+          compScoreEl.innerHTML = compScore;
+          roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`;
+        } else {
+          userMsg.innerHTML = `${userChoice} <sup>(user)</sup> beats ${compChoice} <sup>(comp)</sup>. You win!`;
+          toggleClass("green", event.target);
+          userScore++;
+          userScoreEl.innerHTML = userScore;
+          roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`;
         }
-        case 'scissors': {
-            if (compChoice === 'scissors'){
-                userMsg.innerHTML = `It was a draw! You both chose ${userChoice}`
-
-                roundCount++
-                roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`
-            } else if (compChoice === 'rock'){
-                userMsg.innerHTML = `${compChoice} (comp) beats ${userChoice} (user). You lose!`
-
-                compScore++
-                roundCount++
-                roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`
-            } else {    
-                userMsg.innerHTML = `${userChoice} (user) beats ${compChoice}(comp). You win!`
-
-                userScore++
-                userScoreEl.innerHTML = userScore
-                roundCount++
-                roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`
-            }
-            break
-        } 
+        break;
+      }
+      case "paper": {
+        if (compChoice === "paper") {
+          userMsg.innerHTML = `It was a draw! You both chose ${userChoice}`;
+          toggleClass("orange", event.target);
+        } else if (compChoice === "scissors") {
+          userMsg.innerHTML = `${compChoice} <sup>(comp)</sup> beats ${userChoice} <sup>(user)</sup>. You lose!`;
+          toggleClass("red", event.target);
+          compScore++;
+          compScoreEl.innerHTML = compScore;
+          roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`;
+        } else {
+          userMsg.innerHTML = `${userChoice} <sup>(user)</sup> beats ${compChoice} <sup>(comp)</sup>. You win!`;
+          toggleClass("green", event.target);
+          userScore++;
+          userScoreEl.innerHTML = userScore;
+          roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`;
+        }
+        break;
+      }
+      case "scissors": {
+        if (compChoice === "scissors") {
+          userMsg.innerHTML = `It was a draw! You both chose ${userChoice}`;
+          toggleClass("orange", event.target);
+          roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`;
+        } else if (compChoice === "rock") {
+          userMsg.innerHTML = `${compChoice} <sup>(comp)</sup> beats ${userChoice} <sup>(user)</sup>. You lose!`;
+          toggleClass("red", event.target);
+          compScore++;
+          roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`;
+        } else {
+          userMsg.innerHTML = `${userChoice} <sup>(user)</sup> beats ${compChoice} <sup>(comp)</sup>. You win!`;
+          toggleClass("green", event.target);
+          userScore++;
+          userScoreEl.innerHTML = userScore;
+          roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`;
+        }
+        break;
+      }
     } // end switch
 
+    roundCount++;
+
     // output final msg
-    if (numOfRounds === roundCount && userScore === compScore){
-        userMsg.innerHTML = `It was a draw!`    
-        } else if (numOfRounds === roundCount && userScore > compScore){
-        userMsg.innerHTML = `You win!`
-        } else if (numOfRounds === roundCount && userScore < compScore){
-            userMsg.innerHTML = `You lose!`
+    if (numOfRounds == roundCount && userScore === compScore) {
+      userMsg.innerHTML = `It was a draw!`;
+    } else if (numOfRounds == roundCount && userScore > compScore) {
+      userMsg.innerHTML = `You win!`;
+    } else if (numOfRounds == roundCount && userScore < compScore) {
+      userMsg.innerHTML = `You lose!`;
     }
-
-    } // end event listener block
-) // end event listener
-
-
-
-
-
+  } // end event listener block
+); // end event listener

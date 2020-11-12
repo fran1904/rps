@@ -1,12 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
-  
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap')
+
 // resets
 *
     margin: 0
     padding: 0
     box-sizing: border-box
 a
-    text-decoration: none
     color: inherit
     cursor: pointer
     display: inline-block
@@ -20,18 +19,12 @@ input
 input, textarea
     outline: none
 
-
-    // Color palette variables
+// Color palette variables
 
 $primary: hsl(228, 33%, 97%)
-
 $secondary: hsl(0, 0%, 12%)
-
 $accent: hsl(356, 100%, 69%)
-
 $restart: hsl(21, 59%, 55%)
-
-
 
 // global styles 
 body
@@ -44,13 +37,24 @@ body
         > *
             margin-bottom: 60px
 
-
-// layout
-#score-box, #play-icons
+// custom styles
+#play-icons
     display: flex
     justify-content: space-around
     margin-left: 36%
     margin-right: 36%
+
+#score-box
+    display: flex
+    margin-left: 36%
+    margin-right: 36%
+    div:nth-of-type(2)
+        display: flex
+        margin: 0 auto
+        font-size: 2.5rem
+        font-weight: 300
+        span
+            margin: 7px 10px
 
 #rounds-box
     display: flex
@@ -76,11 +80,7 @@ body
             label
                 font-size: 1.75rem
             label[for=five]
-                padding-left: 14px 
-           
-
-
-// Custom styling
+                padding-left: 14px
 
 header
     background: $primary
@@ -99,6 +99,21 @@ header, #rounds-box, h3#msg, small, #move, footer
 
 #score-box
     padding: 30px
+    position: relative
+
+.user
+    position: absolute
+    top: 43px
+    left: -35px
+    background: $accent
+    padding: 14px
+
+.comp
+    position: absolute
+    top: 43px
+    right: -35px
+    background: $accent
+    padding: 14px
 
 i
     border: 2px solid $primary
@@ -107,10 +122,26 @@ i
     margin: 8px
     font-size: 2.5rem
 
+a
+    color: $restart
+
 // text sizing
 #msg
     font-size: 2.5rem
     font-weight: 300
 .round
     font-size: 3rem
-    
+
+// change icon color on click
+.icon-btn
+    background: transparent
+    cursor: pointer
+    &--orange
+        &:active
+            background: orange
+    &--red
+        &:active
+            background: red
+    &--green
+        &:active
+            background: green

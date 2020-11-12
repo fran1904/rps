@@ -7,7 +7,6 @@
 }
 
 a {
-  text-decoration: none;
   color: inherit;
   cursor: pointer;
   display: inline-block;
@@ -43,7 +42,7 @@ body main > * {
   margin-bottom: 60px;
 }
 
-#score-box, #play-icons {
+#play-icons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -51,6 +50,27 @@ body main > * {
       justify-content: space-around;
   margin-left: 36%;
   margin-right: 36%;
+}
+
+#score-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 36%;
+  margin-right: 36%;
+}
+
+#score-box div:nth-of-type(2) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 auto;
+  font-size: 2.5rem;
+  font-weight: 300;
+}
+
+#score-box div:nth-of-type(2) span {
+  margin: 7px 10px;
 }
 
 #rounds-box {
@@ -122,6 +142,23 @@ header, #rounds-box, h3#msg, small, #move, footer {
 
 #score-box {
   padding: 30px;
+  position: relative;
+}
+
+.user {
+  position: absolute;
+  top: 43px;
+  left: -35px;
+  background: #ff616b;
+  padding: 14px;
+}
+
+.comp {
+  position: absolute;
+  top: 43px;
+  right: -35px;
+  background: #ff616b;
+  padding: 14px;
 }
 
 i {
@@ -132,6 +169,10 @@ i {
   font-size: 2.5rem;
 }
 
+a {
+  color: #d07849;
+}
+
 #msg {
   font-size: 2.5rem;
   font-weight: 300;
@@ -139,5 +180,22 @@ i {
 
 .round {
   font-size: 3rem;
+}
+
+.icon-btn {
+  background: transparent;
+  cursor: pointer;
+}
+
+.icon-btn--orange:active {
+  background: orange;
+}
+
+.icon-btn--red:active {
+  background: red;
+}
+
+.icon-btn--green:active {
+  background: green;
 }
 /*# sourceMappingURL=style.css.map */
