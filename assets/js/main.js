@@ -17,17 +17,26 @@ const computerChoices = ['rock', 'paper', 'scissors']
 let userChoice = ""
 let compChoice = ""
 let radioBtns = `<form action="return false">
-<input type="radio" id="five" name="rounds" value="5" checked>
-<label for="five">5</label>
-
-<input type="radio" id="ten" name="rounds" value="10">
-<label for="ten">10</label><br>
-
-<input type="radio" id="fifteen" name="rounds" value="15">
-<label for="fifteen">15</label>
-
-<input type="radio" id="twenty" name="rounds" value="20">
-<label for="twenty">20</label>
+<div>
+    <div>
+        <input type="radio" id="five" name="rounds" value="5" checked>
+        <label for="five">5</label>
+    </div>
+    <div>
+        <input type="radio" id="ten" name="rounds" value="10">
+        <label for="ten">10</label>
+    </div>
+</div>
+<div>
+    <div>
+        <input type="radio" id="fifteen" name="rounds" value="15">
+        <label for="fifteen">15</label>
+    </div>
+    <div>
+        <input type="radio" id="twenty" name="rounds" value="20">
+        <label for="twenty">20</label>
+    </div>
+</div>
 </form>`
 
 roundsOutputElement.innerHTML = radioBtns
@@ -46,135 +55,88 @@ let reset = () => {
 }
 
 // Store the number of rounds selected by the user in numOfRounds.
-roundsOutputElement.addEventListener('change', (event) => {
+roundsOutputElement.addEventListener('click', (event) => {
    numOfRounds = event.target.value
 })
 
 
-
-
-
 playIconsParent.addEventListener('click', (event) => {
-    roundsOutputElement.innerHTML = `${roundCount} / ${numOfRounds}`
+    console.log(event);
+    roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`
     userChoice = event.target.dataset.handtype
     compChoice = computerChoices[Math.floor(Math.random() * computerChoices.length)]
 
-    // Start switch
     switch (userChoice){
         case 'rock': {
             if (compChoice === 'rock'){
-                // Display msg `It was a draw! You both chose ${userChoice}`; 
                 userMsg.innerHTML = `It was a draw! You both chose ${userChoice}`
-                // Change colors
-                event.target.style.background = 'orange'
-                event.target.style.borderColor = 'orange'
-                // increment roundCount (but don't increment either score)
+                // event.target.style.background = 'orange'
                 roundCount++
-                roundsOutputElement.innerHTML = `${roundCount} / ${numOfRounds}`
-
-
+                roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`
             } else if (compChoice === 'paper'){
-                // Display msg `${compChoice} (comp) beats ${userChoice} (user). You lose!`
                 userMsg.innerHTML = `${compChoice} (comp) beats ${userChoice} (user). You lose!`
-                // Change colors
-                event.target.style.background = 'red'
-                event.target.style.borderColor = 'red'
-                // increment compScore
+
                 compScore++
                 compScoreEl.innerHTML = compScore
-                // increment roundCount
                 roundCount++
-                roundsOutputElement.innerHTML = `${roundCount} / ${numOfRounds}`
-            } else {      // compChoice must be === 'scissors'
-                // Display msg `${userChoice} (user) beats ${compChoice}(comp). You win!`
+                roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`
+            } else {     
                 userMsg.innerHTML = `${userChoice} (user) beats ${compChoice}(comp). You win!`
-                // Change colors
-                event.target.style.background = 'green'
-                event.target.style.borderColor = 'green'
-                // increment userScore; 
+
                 userScore++
                 userScoreEl.innerHTML = userScore
-                //increment roundCount;
                 roundCount++
-                roundsOutputElement.innerHTML = `${roundCount} / ${numOfRounds}`
+                roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`
             }
             break
         } 
         case 'paper': {
             if (compChoice === 'paper'){
-                // Display msg `It was a draw! You both chose ${userChoice}`; 
                 userMsg.innerHTML = `It was a draw! You both chose ${userChoice}`
-                // Change colors
-                event.target.style.background = 'orange'
-                event.target.style.borderColor = 'orange'
-                // increment roundCount (but don't increment either score)
+
                 roundCount++
             } else if (compChoice === 'scissors'){
-                // Display msg `${compChoice} (comp) beats ${userChoice} (user). You lose!`
                 userMsg.innerHTML = `${compChoice} (comp) beats ${userChoice} (user). You lose!`
-                // Change colors
-                event.target.style.background = 'red'
-                event.target.style.borderColor = 'red'
-                // increment compScore
+
                 compScore++
                 compScoreEl.innerHTML = compScore
-                // increment roundCount
                 roundCount++
-                roundsOutputElement.innerHTML = `${roundCount} / ${numOfRounds}`
-            } else {      // compChoice must be === 'rock'
-                // Display msg `${userChoice} (user) beats ${compChoice}(comp). You win!`
+                roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`
+            } else {    
                 userMsg.innerHTML = `${userChoice} (user) beats ${compChoice}(comp). You win!`
-                // Change colors
-                event.target.style.background = 'green'
-                event.target.style.borderColor = 'green'
-                // increment userScore; 
+
                 userScore++
                 userScoreEl.innerHTML = userScore
-                //increment roundCount;
                 roundCount++
-                roundsOutputElement.innerHTML = `${roundCount} / ${numOfRounds}`
+                roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`
             }
             break
         }
         case 'scissors': {
             if (compChoice === 'scissors'){
-                // Display msg `It was a draw! You both chose ${userChoice}`; 
                 userMsg.innerHTML = `It was a draw! You both chose ${userChoice}`
-                // Change colors
-                event.target.style.background = 'orange'
-                event.target.style.borderColor = 'orange'
-                // increment roundCount (but don't increment either score)
+
                 roundCount++
-                roundsOutputElement.innerHTML = `${roundCount} / ${numOfRounds}`
+                roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`
             } else if (compChoice === 'rock'){
-                // Display msg `${compChoice} (comp) beats ${userChoice} (user). You lose!`
                 userMsg.innerHTML = `${compChoice} (comp) beats ${userChoice} (user). You lose!`
-                // Change colors
-                event.target.style.background = 'red'
-                event.target.style.borderColor = 'red'
-                // increment compScore
+
                 compScore++
-                // increment roundCount
                 roundCount++
-                roundsOutputElement.innerHTML = `${roundCount} / ${numOfRounds}`
-            } else {      // compChoice must be === 'paper'
-                // Display msg `${userChoice} (user) beats ${compChoice}(comp). You win!`
+                roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`
+            } else {    
                 userMsg.innerHTML = `${userChoice} (user) beats ${compChoice}(comp). You win!`
-                // Change colors
-                event.target.style.background = 'green'
-                event.target.style.borderColor = 'green'
-                // increment userScore; 
+
                 userScore++
                 userScoreEl.innerHTML = userScore
-                //increment roundCount;
                 roundCount++
-                roundsOutputElement.innerHTML = `${roundCount} / ${numOfRounds}`
+                roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`
             }
             break
         } 
     } // end switch
 
-        // output final msg
+    // output final msg
     if (numOfRounds === roundCount && userScore === compScore){
         userMsg.innerHTML = `It was a draw!`    
         } else if (numOfRounds === roundCount && userScore > compScore){
@@ -182,7 +144,6 @@ playIconsParent.addEventListener('click', (event) => {
         } else if (numOfRounds === roundCount && userScore < compScore){
             userMsg.innerHTML = `You lose!`
     }
-
 
     } // end event listener block
 ) // end event listener
