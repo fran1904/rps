@@ -188,14 +188,16 @@ a {
 }
 
 .icon-btn--orange:active {
-  background: orange;
+  opacity: 0.5;
 }
 
 .icon-btn--red:active {
-  background: red;
+  background: #ff616b;
+  opacity: 0.5;
 }
 
 .icon-btn--green:active {
-  background: green;
+  background: lime;
+  opacity: 0.5;
 }
 /*# sourceMappingURL=style.css.map */

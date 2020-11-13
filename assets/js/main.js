@@ -6,7 +6,7 @@ let userMsg = document.querySelector("#msg");
 let playIconsParent = document.querySelector("#play-icons");
 let restartEl = document.querySelector("#reset");
 
-// Global declarations
+// Global stuff
 let roundCount = 0;
 var userScore = 0;
 var compScore = 0;
@@ -39,7 +39,7 @@ let radioBtns = `<form action="return false">
 
 roundsOutputElement.innerHTML = radioBtns;
 
-// functions
+// reset function
 let reset = () => {
   roundsOutputElement.innerHTML = radioBtns;
   roundCount = 0;
@@ -49,11 +49,13 @@ let reset = () => {
   compScoreEl.innerHTML = 0;
   numOfRounds = 5;
   userChoice = "";
-  compChoice = "";
+  compChoice = "";  
+  msg.innerHTML = "Let's play"
 };
 
+// toggle color on click functiond
 const toggleClass = (state, ele) => {
-  stripClasses(ele);
+stripClasses(ele);
   if (state === "red") {
     ele.classList.add("icon-btn--red");
   }
@@ -76,9 +78,9 @@ roundsOutputElement.addEventListener("click", (event) => {
   numOfRounds = parseInt(event.target.value);
 });
 
-playIconsParent.addEventListener(
-  "click",
-  (event) => {
+// handle click event
+playIconsParent.addEventListener("click", (event) => {
+    roundCount++;
     roundsOutputElement.innerHTML = `<div class="round">${roundCount} / ${numOfRounds}</div>`;
     userChoice = event.target.dataset.handtype;
     compChoice =
@@ -144,8 +146,6 @@ playIconsParent.addEventListener(
         break;
       }
     } // end switch
-
-    roundCount++;
 
     // output final msg
     if (numOfRounds == roundCount && userScore === compScore) {
