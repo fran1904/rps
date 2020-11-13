@@ -187,16 +187,16 @@ a {
   cursor: pointer;
 }
 
-.icon-btn--orange:active {
+.icon-btn--orange {
   opacity: 0.5;
 }
 
-.icon-btn--red:active {
+.icon-btn--red {
   background: #ff616b;
   opacity: 0.5;
 }
 
-.icon-btn--green:active {
+.icon-btn--green {
   background: lime;
   opacity: 0.5;
 }

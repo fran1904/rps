@@ -53,9 +53,11 @@ let reset = () => {
   msg.innerHTML = "Let's play"
 };
 
-// toggle color on click functiond
-const toggleClass = (state, ele) => {
-stripClasses(ele);
+// toggle color on click function
+const toggleClass = (state, ele) => { 
+    setTimeout(() => {
+        stripClasses(ele);
+    }, 200);
   if (state === "red") {
     ele.classList.add("icon-btn--red");
   }
